@@ -1,0 +1,14 @@
+# criar base da dados:
+CREATE DATABASE eventos_academicos
+
+# criar tabela participantes
+
+CREATE TABLE participantes(
+    CPF_RG INT NOT NULL,
+    PRIMARY KEY (CPF_RG),
+    Tipo_participante VARCHAR (30) NOT NULL, 
+    Nome VARCHAR (50) NOT NULL,
+    Tipo_documento VARCHAR (50) NOT NULL,
+    Email VARCHAR (50) NOT NULL,
+    Instituicao VARCHAR (50) NOT NULL,
+    Telefone INT NOT NULL)
