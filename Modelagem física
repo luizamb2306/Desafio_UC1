@@ -18,7 +18,8 @@ CREATE TABLE certificados(
     Numero_certificado INTEGER NOT NULL,
     PRIMARY KEY (Numero_certificado),
     Numero_inscricao INTEGER NOT NULL, 
-    FOREIGN KEY (Numero_inscricao) REFERENCES inscricoes(Numero_inscricao)
+    FOREIGN KEY (Numero_inscricao) REFERENCES inscricoes(Numero_inscricao),
+    presenca VARCHAR (50) NOT NULL
     )
 
 CREATE TABLE locais (
@@ -154,31 +155,88 @@ INSERT INTO inscricoes (Numero_inscricao, Nome_evento, CPF_RG, Data_Hora, Status
 (15, 'Seminário Direito', '51234567890', '2026-07-01 09:00:00', 'Confirmado');
 
 #tabela certificados:
-INSERT INTO certificados (Numero_certificado, Numero_inscricao) VALUES
-(101, 1),
-(102, 2),
-(103, 3),
-(104, 4),
-(105, 5),
-(106, 6),
-(107, 7),
-(108, 8),
-(109, 9),
-(110, 10),
-(111, 11),
-(112, 12),
-(113, 13),
-(114, 14),
-(115, 15);
+INSERT INTO certificados (Numero_certificado, Numero_inscricao, presenca) VALUES
+(101, 1, 'Presente'),
+(102, 2, 'Falta'),
+(103, 3, 'Presente'),
+(104, 4, 'Falta'),
+(105, 5, 'Presente'),
+(106, 6, 'Falta'),
+(107, 7, 'Presente'),
+(108, 8, 'Falta'),
+(109, 9, 'Presente'),
+(110, 10, 'Falta'),
+(111, 11, 'Presente'),
+(112, 12, 'Falta'),
+(113, 13, 'Presente'),
+(114, 14, 'Falta'),
+(115, 15, 'Presente');
 
 
+# realizando consultas para testar:
 
+# 1) Liste todos os eventos que ocorrem no "Auditório Central"
 
+	SELECT 
+		Nome_evento
+	FROM
+		eventos
+	WHERE	
+		Nome_local = 'Auditório Central'
+	
+	#resultado:
+	Congresso Física
 
+# 2) Liste todos os participantes inscritos no evento "Congresso de Física"
 
+	SELECT
+		P.nome
+	 FROM
+	 	inscricoes I
+	    INNER JOIN 
+	    participantes_ P
+	    ON I.CPF_RG = P.CPF_RG
+	WHERE	
+		I.Status = "Confirmado" 
+	    AND I.Nome_evento = 'Congresso Física'
 
+	#resultado:
+	Ana Silva
+	Congresso Física
+	Confirmado
 
+# 3)Liste todos os eventos em que o palestrante "Dr. Ana Silva" está participando.
 
+	SELECT
+		E.Nome_evento
+	FROM
+		eventos E
+	    	INNER JOIN palestrantes PA
+	   	 ON E.Nome_palestrantes = PA.Nome_palestrantes
+	WHERE
+		E.Nome_palestrantes = 'Dr. Ana Silva'
+
+	#resultado:
+	Ana Silva
+
+# 4)Quais participantes receberam certificados de presença no evento "Congresso de Física"?
+
+	# será preciso juntar as tabelas certificados com inscricao e inscrição com participante
+
+	SELECT
+		P.Nome
+	FROM
+		certificados C
+	    INNER JOIN inscricoes I
+	    ON C.Numero_inscricao = I.Numero_inscricao
+	    INNER JOIN participantes_ P
+	    ON I.CPF_RG = P.CPF_RG
+	WHERE
+		C.presenca = 'Presente'
+	    AND I.Nome_evento = 'Congresso Física'
+
+	#resultado:
+	Ana Silva
 
 
 
