@@ -46,8 +46,8 @@ CREATE TABLE eventos(
     Taxa_inscricao VARCHAR (3) NOT NULL, # SIM ou NAO
 	tema VARCHAR (1000) NOT NULl,
     Numero_participantes INTEGER NOT NULL, 
-    Data_Hora_Fim DATE NOT NULL, 
-    Data_Hora_Inicio DATE NOT NULL
+    Data_Hora_Fim DATETIME NOT NULL, 
+    Data_Hora_Inicio DATETIME NOT NULL
     )
 
 CREATE TABLE inscricoes(
@@ -57,7 +57,129 @@ CREATE TABLE inscricoes(
     FOREIGN KEY (Nome_evento) REFERENCES eventos(Nome_evento),
     CPF_RG VARCHAR (11) NOT NULL,
     FOREIGN KEY (CPF_RG) REFERENCES participantes_(CPF_RG),
-    Data_Hora DATE NOT NULL,
+    Data_Hora DATETIME NOT NULL,
     Status VARCHAR (20) NOT NULL
 	)
-    
+
+# inserir dados para depois testar:
+# pedi pro copilot criar 15 observações diferentes para cada tabela:
+# tabela participantes_:
+INSERT INTO participantes_ (CPF_RG, Tipo_participante, Nome, Tipo_documento, Email, Instituicao, Telefone) VALUES
+('12345678901', 'Estudante', 'Ana Silva', 'CPF', 'ana.silva@example.com', 'Universidade XYZ', '21987654321'),
+('23456789012', 'Professor', 'Carlos Souza', 'CPF', 'carlos.souza@example.com', 'Universidade ABC', '21987654322'),
+('34567890123', 'Pesquisador', 'Mariana Lima', 'CPF', 'mariana.lima@example.com', 'Instituto DEF', '21987654323'),
+('45678901234', 'Estudante', 'João Pereira', 'CPF', 'joao.pereira@example.com', 'Universidade XYZ', '21987654324'),
+('56789012345', 'Professor', 'Fernanda Costa', 'CPF', 'fernanda.costa@example.com', 'Universidade ABC', '21987654325'),
+('67890123456', 'Pesquisador', 'Ricardo Alves', 'CPF', 'ricardo.alves@example.com', 'Instituto DEF', '21987654326'),
+('78901234567', 'Estudante', 'Juliana Martins', 'CPF', 'juliana.martins@example.com', 'Universidade XYZ', '21987654327'),
+('89012345678', 'Professor', 'Paulo Oliveira', 'CPF', 'paulo.oliveira@example.com', 'Universidade ABC', '21987654328'),
+('90123456789', 'Pesquisador', 'Camila Rocha', 'CPF', 'camila.rocha@example.com', 'Instituto DEF', '21987654329'),
+('01234567890', 'Estudante', 'Lucas Fernandes', 'CPF', 'lucas.fernandes@example.com', 'Universidade XYZ', '21987654330'),
+('11234567890', 'Professor', 'Patrícia Lima', 'CPF', 'patricia.lima@example.com', 'Universidade ABC', '21987654331'),
+('21234567890', 'Pesquisador', 'Gustavo Ribeiro', 'CPF', 'gustavo.ribeiro@example.com', 'Instituto DEF', '21987654332'),
+('31234567890', 'Estudante', 'Larissa Souza', 'CPF', 'larissa.souza@example.com', 'Universidade XYZ', '21987654333'),
+('41234567890', 'Professor', 'Rafael Santos', 'CPF', 'rafael.santos@example.com', 'Universidade ABC', '21987654334'),
+('51234567890', 'Pesquisador', 'Bianca Mendes', 'CPF', 'bianca.mendes@example.com', 'Instituto DEF', '21987654335');
+
+# tabela locais:
+INSERT INTO locais (Nome_local, Recursos_disponiveis, Capacidade) VALUES
+('Auditório Central', 'Projetor, Microfone, Wi-Fi', 200),
+('Sala de Conferências A', 'Wi-Fi, Ar Condicionado, Mesa de Reunião', 50),
+('Sala de Conferências B', 'Wi-Fi, Ar Condicionado, Mesa de Reunião', 50),
+('Laboratório de Informática', 'Computadores, Impressora, Wi-Fi', 30),
+('Sala de Aula 101', 'Quadro Branco, Projetor, Wi-Fi', 40),
+('Sala de Aula 102', 'Quadro Branco, Projetor, Wi-Fi', 40),
+('Sala de Aula 103', 'Quadro Branco, Projetor, Wi-Fi', 40),
+('Biblioteca', 'Livros, Wi-Fi, Mesas de Estudo', 100),
+('Sala de Estudos', 'Mesas de Estudo, Wi-Fi, Ar Condicionado', 20),
+('Sala de Reuniões', 'Mesa de Reunião, Wi-Fi, Telefone', 15),
+('Auditório Pequeno', 'Projetor, Microfone, Wi-Fi', 100),
+('Sala de Treinamento', 'Computadores, Projetor, Wi-Fi', 25),
+('Sala de Workshop', 'Mesas de Trabalho, Wi-Fi, Ar Condicionado', 30),
+('Sala de Seminários', 'Projetor, Microfone, Wi-Fi', 60),
+('Espaço de Coworking', 'Mesas de Trabalho, Wi-Fi, Impressora', 50);
+
+#tabela palestrantes:
+INSERT INTO palestrantes (Nome_palestrantes, curriculo, contato) VALUES
+('Dr. Ana Silva', 'PhD em Física, Professora na Universidade XYZ, Autora de diversos artigos científicos.', '21987654321'),
+('Prof. Carlos Souza', 'Mestre em Matemática, Professor na Universidade ABC, Especialista em Álgebra.', '21987654322'),
+('Dr. Mariana Lima', 'PhD em Biologia, Pesquisadora no Instituto DEF, Experiência em Genética.', '21987654323'),
+('Prof. João Pereira', 'Mestre em História, Professor na Universidade XYZ, Autor de livros sobre História Medieval.', '21987654324'),
+('Dr. Fernanda Costa', 'PhD em Química, Professora na Universidade ABC, Especialista em Química Orgânica.', '21987654325'),
+('Prof. Ricardo Alves', 'Mestre em Engenharia, Pesquisador no Instituto DEF, Experiência em Robótica.', '21987654326'),
+('Dr. Juliana Martins', 'PhD em Psicologia, Professora na Universidade XYZ, Especialista em Psicologia Clínica.', '21987654327'),
+('Prof. Paulo Oliveira', 'Mestre em Economia, Professor na Universidade ABC, Especialista em Economia Internacional.', '21987654328'),
+('Dr. Camila Rocha', 'PhD em Medicina, Pesquisadora no Instituto DEF, Experiência em Cardiologia.', '21987654329'),
+('Prof. Lucas Fernandes', 'Mestre em Filosofia, Professor na Universidade XYZ, Autor de livros sobre Ética.', '21987654330'),
+('Dr. Patrícia Lima', 'PhD em Sociologia, Professora na Universidade ABC, Especialista em Sociologia Urbana.', '21987654331'),
+('Prof. Gustavo Ribeiro', 'Mestre em Física, Pesquisador no Instituto DEF, Experiência em Física Quântica.', '21987654332'),
+('Dr. Larissa Souza', 'PhD em Educação, Professora na Universidade XYZ, Especialista em Metodologias de Ensino.', '21987654333'),
+('Prof. Rafael Santos', 'Mestre em Ciências da Computação, Professor na Universidade ABC, Especialista em Inteligência Artificial.', '21987654334'),
+('Dr. Bianca Mendes', 'PhD em Direito, Pesquisadora no Instituto DEF, Experiência em Direito Constitucional.', '21987654335');
+
+#tabela eventos:
+INSERT INTO eventos (Nome_evento, Nome_local, Nome_palestrantes, Descricao, Taxa_inscricao, tema, Numero_participantes, Data_Hora_Fim, Data_Hora_Inicio) VALUES
+('Congresso Física', 'Auditório Central', 'Dr. Ana Silva', 'Avanços na Física.', 'SIM', 'Física', 200, '2025-05-10 18:00:00', '2025-05-08 09:00:00'),
+('Workshop Matemática', 'Sala Conf A', 'Prof. Carlos Souza', 'Metodologias de Matemática.', 'NAO', 'Matemática', 50, '2025-06-15 17:00:00', '2025-06-14 09:00:00'),
+('Seminário Biologia', 'Sala Conf B', 'Dr. Mariana Lima', 'Pesquisas em Genética.', 'SIM', 'Biologia', 50, '2025-07-20 18:00:00', '2025-07-19 09:00:00'),
+('Palestra História', 'Lab Informática', 'Prof. João Pereira', 'História Medieval.', 'NAO', 'História', 30, '2025-08-25 18:00:00', '2025-08-24 09:00:00'),
+('Congresso Química', 'Sala Aula 101', 'Dr. Fernanda Costa', 'Química Orgânica.', 'SIM', 'Química', 40, '2025-09-30 18:00:00', '2025-09-29 09:00:00'),
+('Workshop Robótica', 'Sala Aula 102', 'Prof. Ricardo Alves', 'Avanços em Robótica.', 'NAO', 'Engenharia', 40, '2025-10-05 18:00:00', '2025-10-04 09:00:00'),
+('Seminário Psicologia', 'Sala Aula 103', 'Dr. Juliana Martins', 'Psicologia Clínica.', 'SIM', 'Psicologia', 40, '2025-11-10 18:00:00', '2025-11-09 09:00:00'),
+('Palestra Economia', 'Biblioteca', 'Prof. Paulo Oliveira', 'Economia Internacional.', 'NAO', 'Economia', 100, '2025-12-15 18:00:00', '2025-12-14 09:00:00'),
+('Congresso Medicina', 'Sala Estudos', 'Dr. Camila Rocha', 'Cardiologia.', 'SIM', 'Medicina', 20, '2026-01-20 18:00:00', '2026-01-19 09:00:00'),
+('Workshop Filosofia', 'Sala Reuniões', 'Prof. Lucas Fernandes', 'Ética.', 'NAO', 'Filosofia', 15, '2026-02-25 18:00:00', '2026-02-24 09:00:00'),
+('Seminário Sociologia', 'Auditório Pequeno', 'Dr. Patrícia Lima', 'Sociologia Urbana.', 'SIM', 'Sociologia', 100, '2026-03-30 18:00:00', '2026-03-29 09:00:00'),
+('Palestra Física Quântica', 'Sala Treinamento', 'Prof. Gustavo Ribeiro', 'Física Quântica.', 'NAO', 'Física', 25, '2026-04-05 18:00:00', '2026-04-04 09:00:00'),
+('Congresso Educação', 'Sala Workshop', 'Dr. Larissa Souza', 'Metodologias de Ensino.', 'SIM', 'Educação', 30, '2026-05-10 18:00:00', '2026-05-09 09:00:00'),
+('Workshop IA', 'Sala Seminários', 'Prof. Rafael Santos', 'Inteligência Artificial.', 'NAO', 'Computação', 60, '2026-06-15 18:00:00', '2026-06-14 09:00:00'),
+('Seminário Direito', 'Coworking', 'Dr. Bianca Mendes', 'Direito Constitucional.', 'SIM', 'Direito', 50, '2026-07-20 18:00:00', '2026-07-19 09:00:00');
+
+#tabela inscrições:
+INSERT INTO inscricoes (Numero_inscricao, Nome_evento, CPF_RG, Data_Hora, Status) VALUES
+(1, 'Congresso Física', '12345678901', '2025-05-01 10:00:00', 'Confirmado'),
+(2, 'Workshop Matemática', '23456789012', '2025-06-01 11:00:00', 'Confirmado'),
+(3, 'Seminário Biologia', '34567890123', '2025-07-01 12:00:00', 'Confirmado'),
+(4, 'Palestra História', '45678901234', '2025-08-01 13:00:00', 'Confirmado'),
+(5, 'Congresso Química', '56789012345', '2025-09-01 14:00:00', 'Confirmado'),
+(6, 'Workshop Robótica', '67890123456', '2025-10-01 15:00:00', 'Confirmado'),
+(7, 'Seminário Psicologia', '78901234567', '2025-11-01 16:00:00', 'Confirmado'),
+(8, 'Palestra Economia', '89012345678', '2025-12-01 17:00:00', 'Confirmado'),
+(9, 'Congresso Medicina', '90123456789', '2026-01-01 18:00:00', 'Confirmado'),
+(10, 'Workshop Filosofia', '01234567890', '2026-02-01 19:00:00', 'Confirmado'),
+(11, 'Seminário Sociologia', '11234567890', '2026-03-01 20:00:00', 'Confirmado'),
+(12, 'Palestra Física Quântica', '21234567890', '2026-04-01 21:00:00', 'Confirmado'),
+(13, 'Congresso Educação', '31234567890', '2026-05-01 22:00:00', 'Confirmado'),
+(14, 'Workshop IA', '41234567890', '2026-06-01 23:00:00', 'Confirmado'),
+(15, 'Seminário Direito', '51234567890', '2026-07-01 09:00:00', 'Confirmado');
+
+#tabela certificados:
+INSERT INTO certificados (Numero_certificado, Numero_inscricao) VALUES
+(101, 1),
+(102, 2),
+(103, 3),
+(104, 4),
+(105, 5),
+(106, 6),
+(107, 7),
+(108, 8),
+(109, 9),
+(110, 10),
+(111, 11),
+(112, 12),
+(113, 13),
+(114, 14),
+(115, 15);
+
+
+
+
+
+
+
+
+
+
+
+
+
