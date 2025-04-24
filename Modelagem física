@@ -1,14 +1,63 @@
 # criar base da dados:
 CREATE DATABASE eventos_academicos
 
-# criar tabela participantes
+# criar tabelas:
 
-CREATE TABLE participantes(
-    CPF_RG INT NOT NULL,
-    PRIMARY KEY (CPF_RG),
+CREATE TABLE participantes_ (
+    CPF_RG VARCHAR (11) NOT NULL,
     Tipo_participante VARCHAR (30) NOT NULL, 
     Nome VARCHAR (50) NOT NULL,
     Tipo_documento VARCHAR (50) NOT NULL,
     Email VARCHAR (50) NOT NULL,
     Instituicao VARCHAR (50) NOT NULL,
-    Telefone INT NOT NULL)
+    Telefone VARCHAR (11) NOT NULL,
+    PRIMARY KEY (CPF_RG)
+    )
+
+CREATE TABLE certificados(
+    Numero_certificado INTEGER NOT NULL,
+    PRIMARY KEY (Numero_certificado),
+    Numero_inscricao INTEGER NOT NULL, 
+    FOREIGN KEY (Numero_inscricao) REFERENCES inscricoes(Numero_inscricao)
+    )
+
+CREATE TABLE locais (
+    Nome_local VARCHAR (30) NOT NULL, 
+    PRIMARY KEY (Nome_local),
+    Recursos_disponiveis VARCHAR (1000) NOT NULL, 
+    Capacidade INTEGER NOT NULL
+    )
+
+CREATE TABLE palestrantes (
+    Nome_palestrantes VARCHAR (50) NOT NULL, 
+    PRIMARY KEY (Nome_palestrantes),
+    curriculo VARCHAR (1000) NOT NULL,
+    contato VARCHAR (11) NOT NULL
+    )
+
+CREATE TABLE eventos(
+    Nome_evento VARCHAR (30) NOT NULL, 
+    PRIMARY KEY (Nome_evento),
+    Nome_local VARCHAR (30) NOT NULL,
+    FOREIGN KEY (Nome_local) REFERENCES locais(Nome_local),
+    Nome_palestrantes VARCHAR (50) NOT NULL,
+    FOREIGN KEY (Nome_palestrantes) REFERENCES palestrantes(Nome_palestrantes),
+    Descricao VARCHAR (1000) NOT NULL,
+    Taxa_inscricao VARCHAR (3) NOT NULL, # SIM ou NAO
+	tema VARCHAR (1000) NOT NULl,
+    Numero_participantes INTEGER NOT NULL, 
+    Data_Hora_Fim DATE NOT NULL, 
+    Data_Hora_Inicio DATE NOT NULL
+    )
+
+CREATE TABLE inscricoes(
+    Numero_inscricao INTEGER NOT NULL, 
+    PRIMARY KEY (Numero_inscricao),
+    Nome_evento VARCHAR (30) NOT NULL,
+    FOREIGN KEY (Nome_evento) REFERENCES eventos(Nome_evento),
+    CPF_RG VARCHAR (11) NOT NULL,
+    FOREIGN KEY (CPF_RG) REFERENCES participantes_(CPF_RG),
+    Data_Hora DATE NOT NULL,
+    Status VARCHAR (20) NOT NULL
+	)
+    
